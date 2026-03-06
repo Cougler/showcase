@@ -1,0 +1,5 @@
+{
+  "name": "showcase",
+  "url": "https://showcase.aaroncougle.com",
+  "notes": "Showcase is live at showcase.aaroncougle.com. 4 slides: Flowki, Hierarch, Plants Are People Too, Adonde. Bento grid layouts, sidebar nav, lightbox expand. Deploy: npx vercel deploy --prod --yes --scope acportfolio from ~/Apps/showcase."
+}

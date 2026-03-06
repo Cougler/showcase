@@ -16,9 +16,7 @@ export default function DotNav({ current, onNavigate }: DotNavProps) {
           className={`dot ${current === i ? 'active' : ''}`}
           onClick={() => onNavigate(i)}
           aria-label={`Go to slide ${i + 1}: ${slide.appName}`}
-        >
-          <span className="dot-label">{slide.appName}</span>
-        </button>
+        />
       ))}
     </nav>
   );

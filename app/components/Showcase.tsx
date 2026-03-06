@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import DotNav from './DotNav';
 import SlideView from './SlideView';
 import { slides } from '../data/slides';
@@ -8,6 +8,7 @@ import { slides } from '../data/slides';
 export default function Showcase() {
   const [current, setCurrent] = useState(0);
   const total = slides.length;
+  const touchStartY = useRef<number | null>(null);
 
   const go = useCallback(
     (next: number) => {
@@ -16,7 +17,7 @@ export default function Showcase() {
     [total]
   );
 
-  // Keyboard navigation
+  // Keyboard
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (['ArrowDown', 'ArrowRight', ' '].includes(e.key)) {
@@ -31,7 +32,7 @@ export default function Showcase() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [current, go]);
 
-  // Scroll wheel navigation
+  // Scroll wheel
   useEffect(() => {
     let lastScroll = 0;
     const handleWheel = (e: WheelEvent) => {
@@ -46,27 +47,41 @@ export default function Showcase() {
     return () => window.removeEventListener('wheel', handleWheel);
   }, [current, go]);
 
+  // Touch swipe (vertical)
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (touchStartY.current === null) return;
+      const delta = touchStartY.current - e.changedTouches[0].clientY;
+      if (Math.abs(delta) < 40) return; // ignore small swipes
+      if (delta > 0) go(current + 1);
+      else go(current - 1);
+      touchStartY.current = null;
+    };
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [current, go]);
+
   return (
     <div className="slide-container">
-      {/* Logo */}
-      <a href="https://aaroncougle.com" aria-label="Aaron Cougle portfolio">
-        <img
-          src="/favicon-logo.svg"
-          width={32}
-          height={32}
-          alt="AC"
-          style={{ position: 'fixed', top: '2rem', left: '2rem', zIndex: 100 }}
-        />
-      </a>
-
-      <DotNav current={current} onNavigate={go} />
+      <aside className="sidebar">
+        <a href="https://aaroncougle.com" aria-label="Aaron Cougle portfolio" className="sidebar-logo">
+          <img src="/favicon-logo.svg" width={28} height={28} alt="AC" />
+        </a>
+        <DotNav current={current} onNavigate={go} />
+      </aside>
 
       {slides.map((slide, i) => {
         const state = i === current ? 'active' : i < current ? 'above' : 'below';
         return <SlideView key={slide.id} slide={slide} state={state} />;
       })}
 
-      {/* Slide counter */}
       <div className="slide-counter">
         {String(current + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
       </div>
