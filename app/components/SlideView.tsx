@@ -28,37 +28,32 @@ function StandardGrid({ images, fit = 'contain' }: { images: string[]; fit?: 'co
   );
 }
 
+function BentoCell({ src, fit, onClick }: { src: string; fit?: 'cover' | 'contain'; onClick: () => void }) {
+  return (
+    <button className="bento-cell" onClick={onClick} aria-label="Expand image">
+      <img src={src} alt="" draggable={false} style={{ objectFit: fit ?? 'cover' }} />
+      <div className="bento-expand-hint">↗</div>
+    </button>
+  );
+}
+
 function BentoGrid({ slide }: { slide: ShowcaseSlide }) {
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const cells = slide.bentoCells ?? [];
+  const [hero, ...thumbs] = slide.bentoCells ?? [];
 
   return (
     <>
-      <div
-        className="bento-grid"
-        style={{
-          gridTemplateAreas: slide.bentoAreas,
-          gridTemplateColumns: slide.bentoCols ?? '1fr 1fr 1fr',
-          gridTemplateRows: slide.bentoRows ?? '1fr 1fr',
-        }}
-      >
-        {cells.map((cell) => (
-          <button
-            key={cell.area}
-            className="bento-cell"
-            style={{ gridArea: cell.area }}
-            onClick={() => setLightbox(cell.src)}
-            aria-label={`Expand ${cell.area}`}
-          >
-            <img
-              src={cell.src}
-              alt=""
-              draggable={false}
-              style={{ objectFit: cell.fit ?? 'cover' }}
-            />
-            <div className="bento-expand-hint">↗</div>
-          </button>
-        ))}
+      <div className="bento-layout">
+        {hero && (
+          <div className="bento-hero">
+            <BentoCell src={hero.src} fit={hero.fit} onClick={() => setLightbox(hero.src)} />
+          </div>
+        )}
+        <div className="bento-thumbs">
+          {thumbs.map((cell) => (
+            <BentoCell key={cell.area} src={cell.src} fit={cell.fit} onClick={() => setLightbox(cell.src)} />
+          ))}
+        </div>
       </div>
 
       {lightbox && (
