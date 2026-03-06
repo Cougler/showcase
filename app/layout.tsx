@@ -4,6 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Showcase — Aaron Cougle",
   description: "A visual showcase of shipped and concept product design work.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({

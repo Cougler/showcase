@@ -72,7 +72,7 @@ export default function Showcase() {
     <div className="slide-container">
       <aside className="sidebar">
         <a href="https://aaroncougle.com" aria-label="Aaron Cougle portfolio" className="sidebar-logo">
-          <img src="/favicon-logo.svg" width={28} height={28} alt="AC" />
+          <img src="/favicon.svg" width={28} height={28} alt="AC" />
         </a>
         <DotNav current={current} onNavigate={go} />
       </aside>
