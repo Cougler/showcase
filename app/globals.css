@@ -418,19 +418,25 @@ html, body {
     max-width: 100%;
   }
 
-  /* Bento: collapse to single column, fixed row heights */
+  /* Bento: large hero on top, small thumbnails in a row below */
   .bento-grid {
     grid-template-areas: unset !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: unset !important;
     flex: none;
     height: auto;
+    max-height: none;
   }
 
   .bento-cell {
     grid-area: unset !important;
-    height: 200px;
+    height: 90px;
     border-radius: 8px;
+  }
+
+  .bento-cell:first-child {
+    grid-column: 1 / -1;
+    height: 240px;
   }
 
   /* Standard grid: single column */
