@@ -44,7 +44,7 @@ export const slides: ShowcaseSlide[] = [
     id: 'hierarch',
     appName: 'Hierarch',
     type: 'in-development',
-    url: 'hierarchical.app',
+    url: 'tryhierarch.vercel.app',
     description: 'The next evolution of Flowki — rebuilt from scratch with a deeper feature set, a workflow tuned specifically for designers, and the kind of polish that only comes from using your own tool every day.',
     layout: 'bento',
     bentoAreas: '"hero r1" "hero r2" "hero r3"',
