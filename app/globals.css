@@ -74,7 +74,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 5rem 3rem calc(var(--sidebar-w) + 1.25rem);
+  padding: 2rem 5rem 2rem calc(var(--sidebar-w) + 1.25rem);
   transition: opacity 0.5s ease, transform 0.5s ease;
   will-change: transform, opacity;
 }
@@ -219,6 +219,7 @@ html, body {
 .bento-grid {
   flex: 1;
   min-height: 0;
+  max-height: calc(100dvh - 9rem);
   display: grid;
   gap: 10px;
 }
