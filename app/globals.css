@@ -449,7 +449,8 @@ html, body {
   }
 
   .bento-hero {
-    flex: 1;
+    flex: none;
+    height: 250px;
   }
 
   .bento-thumbs {
