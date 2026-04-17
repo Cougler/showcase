@@ -82,8 +82,8 @@ function CloseIcon() {
 
 // ─── Main Component ──────────────────────────────────
 export default function CodeEditor() {
-  const [openTabs, setOpenTabs] = useState<string[]>(['how-i-work']);
-  const [activeTab, setActiveTab] = useState<string>('how-i-work');
+  const [openTabs, setOpenTabs] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('');
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(
     new Set(folders.map((f) => f.name))
   );
