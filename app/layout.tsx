@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Showcase — Aaron Cougle",
-  description: "A visual showcase of shipped and concept product design work.",
+  title: "Aaron Cougle — Product Design Portfolio",
+  description: "Senior Product Designer. 10+ years building SaaS platforms. Growth design, experimentation, AI-native workflows.",
   icons: { icon: "/favicon.svg" },
 };
 

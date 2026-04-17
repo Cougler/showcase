@@ -1,5 +1,5 @@
-import Showcase from './components/Showcase';
+import CodeEditor from './components/CodeEditor';
 
 export default function Home() {
-  return <Showcase />;
+  return <CodeEditor />;
 }
